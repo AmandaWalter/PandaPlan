@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<div>
+  <h1><%= @course.name %> | <small><%= @course.description %></small></h1>
+</div>
+
+<%= link_to 'Edit', edit_course_path(@course) %> |
+<%= link_to 'Back', courses_path %>
+
+<ul class="nav nav-tabs">
+ <% @course.topics.each do |topic| %>
+ 	<li role="presentation" class="active"><a href="#"><%= topic.name %></a></li>
+ <% end %>
+</ul>
