@@ -18,13 +18,21 @@ class TopicsController < ApplicationController
     end
   end
 
+	def destroy
+	    @topic = Topic.find(params[:id])
+	    @topic.destroy
+	    respond_to do |format|
+	      format.html { redirect_to @course, notice: 'Topic was successfully destroyed.' }
+	      format.json { head :no_content }
+	    end
+	  end
+
 	private
 
 	def topic_params
 		params.require(:topic).permit(:name, :description)
 	end
-
 	def set_course
-      @course = Course.find(params[:course_id])
-    end
+    @course = Course.find(params[:course_id])
+  end
 end
