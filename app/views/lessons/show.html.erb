@@ -1,0 +1,18 @@
+<div>
+  <h1><%= @lesson.name %> | <small><%= @lesson.description %></small></h1>
+  <%= link_to 'Edit Lesson', edit_course_topic_lesson_path(@course, @topic,@lesson) %>
+</div>
+<div>
+<h3>Goal</h3>
+<p><%= @lesson.goal %></p>
+<h3>Teacher References</h3>
+<p><%= @lesson.teacher_references %></p>
+<h3>Student Resources</h3>
+<p><%= @lesson.student_resources %></p>
+<h3>See</h3>
+<p><%= @lesson.see %></p>
+<h3>Do</h3>
+<p><%= @lesson.do %></p>
+<h3>Teach</h3>
+<p><%= @lesson.teach %></p>
+</div>

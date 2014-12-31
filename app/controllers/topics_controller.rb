@@ -1,5 +1,6 @@
 class TopicsController < ApplicationController
 	before_action :set_course
+	before_action :set_topic, only: [:show, :edit, :update, :destroy]
 	def new
 		@topic = Topic.new
 	end
@@ -18,8 +19,25 @@ class TopicsController < ApplicationController
     end
   end
 
+  def show
+  end
+
+  def edit
+  end
+
+  def update
+    respond_to do |format|
+      if @topic.update(topic_params)
+        format.html { redirect_to @course, notice: 'Topic was successfully updated.' }
+        format.json { render :show, status: :ok, location: @topic }
+      else
+        format.html { render :edit }
+        format.json { render json: @topic.errors, status: :unprocessable_entity }
+      end
+    end
+  end 
+
 	def destroy
-	    @topic = Topic.find(params[:id])
 	    @topic.destroy
 	    respond_to do |format|
 	      format.html { redirect_to @course, notice: 'Topic was successfully destroyed.' }
@@ -34,5 +52,8 @@ class TopicsController < ApplicationController
 	end
 	def set_course
     @course = Course.find(params[:course_id])
+  end
+  def set_topic
+  	@topic = Topic.find(params[:id])
   end
 end
