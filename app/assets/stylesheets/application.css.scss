@@ -16,3 +16,9 @@
  
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import 'lavish-bootstrap.css.scss';
+
+.footer {
+	margin-right: 20px;
+	text-align: right;
+}

@@ -1,30 +1,16 @@
 <div>
-  <h1><%= @course.name %> | <small><%= @course.description %></small></h1>
+  <h1><%= link_to edit_course_path(@course), class: "btn btn-xs" do %><i class="glyphicon glyphicon-pencil"></i><% end %><%= @course.name %> | <small><%= @course.description %></small></h1>
 </div>
 
-<%= link_to 'Edit Course', edit_course_path(@course), role: "button" %> |
-<%= link_to 'Back to Courses', courses_path %> 
+
 
 <div role = 'tabpanel' class="course-topic-tabs" style='margin-top: 20px'>
-  <ul class="nav nav-tabs" role="tablist">
-  <li><%= link_to 'Create Topic', new_course_topic_path(@course) %>
-	    </li>
-  	<% @course.topics.each_with_index do |topic, i| %>
+  <ul class="nav nav-pills" role="tablist">
+  <% @course.topics.each_with_index do |topic, i| %>
 	  	<% active = i == 0 ? 'active' : 'inactive' %>
 	    <li role='presentation' class= "<%= active %>">
-				<a data-toggle="tab" href="#<%= "tab#{i}" %>" aria-controls="<%= "tab#{i}" %>"><%= topic.name %></a>
-	    </li><% end %>
-
-    
-
-    <!-- <li><a data-toggle="tab" href="#topic2">Topic 2</a></li>
-    <li class="dropdown">
-      <a data-toggle="dropdown" class="dropdown-toggle" href="#">Dropdown <b class="caret"></b></a>
-      <ul class="dropdown-menu">
-        <li><a data-toggle="tab" href="#lesson1">Lesson1</a></li>
-        <li><a data-toggle="tab" href="#lesson2">Lesson2</a></li>
-      </ul>
-    </li> -->
+				<a data-toggle="tab" href="#<%= "tab#{i}" %>" aria-controls="<%= "tab#{i}" %>"><%= topic.name %></a></li><% end %>
+	    <li><%= link_to 'Create Topic', new_course_topic_path(@course) %></li>
   </ul>
 
   <div class="tab-content" style="margin-left: 20px">
@@ -32,30 +18,30 @@
   		<% active = i == 0 ? 'active' : 'inactive' %>
 	    <div role="tabpanel" class="tab-pane <%= active %>" id="<%= "tab#{i}"%>">
 	    <!-- MAKE THE BELOW A PARTIAL. then "render lesson, :lesson => lesson -->
-	      <p style='margin: 10px 0 0 0'><%= topic.description %></p>
-	      <%= link_to [@course,topic], method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-xs" do %>
-    			<i class="glyphicon glyphicon-remove"></i><% end %><br>
-    			<%= link_to 'Edit Topic', edit_course_topic_path(@course, topic) %>
-
-	      <h3>Lessons :</h3>
-	      <div class='well'>
+	      <p style='margin: 10px 0 0 0'>
+	      	<%= link_to [@course,topic], method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-xs" do %><i class="glyphicon glyphicon-trash"></i><% end %>
+    			<%= link_to edit_course_topic_path(@course, topic), class: "btn btn-xs" do %><i class="glyphicon glyphicon-pencil"></i><% end %>
+    			<%= topic.description %>
+    		</p>
+	     <h3>Lessons :</h3>
+	      <div class=''>
 		      
 		        <% if topic.lessons.count == 0 %>
 		          <p>No lessons created yet.</p>
 		          <%= link_to 'Add One Now?', new_course_topic_lesson_path(@course, topic), class: 'btn btn-default' %>  
 	        <% else %>
 	        
-	          <ul class='list-group'>
-	           	<% topic.lessons.each do |lesson|%>
-			      	  <li class='list-group-item'>
-			      	  	<%= link_to "#{lesson.name}", course_topic_lesson_path(@course, topic, lesson) %>
-			      	  	<br>
-			      	  	<%= link_to [@course,topic, lesson], method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-xs" do %>
-    			<i class="glyphicon glyphicon-remove"></i><% end %></li>
-			        <% end %>
-			        <%= link_to 'Add Another lesson', new_course_topic_lesson_path(@course, topic), class: 'btn btn-default' %>
-			      </ul>
-			    <% end %>
+	          <table class='table'>
+	           	
+	           		<% topic.lessons.each do |lesson|%>
+	           		<tr>
+			      	  	
+			      	  	<td><%= link_to "#{lesson.name}", course_topic_lesson_path(@course, topic, lesson) %></td>
+			      	  	<td class="small-cell"><%= link_to [@course,topic, lesson], method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-xs" do %><i class="glyphicon glyphicon-trash"></i><% end %></td>
+			      	  	<% end %>
+			      	  </tr>
+			    </table>
+			    <%= link_to 'Add Another lesson', new_course_topic_lesson_path(@course, topic), class: 'btn btn-default' %><% end %>
 		    </div>
 	    </div>
 	  <% end %>
