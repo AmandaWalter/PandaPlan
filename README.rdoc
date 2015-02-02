@@ -5,3 +5,6 @@ An app to organize lesson plans by topic and course.
 Future:
 Add student role that would include notes/assignments for students.
 Add stacked pills for courses, so course navigation is on the right, like a tabbed notebook and topics within the course are along the top.
+
+Another
+
