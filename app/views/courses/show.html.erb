@@ -5,7 +5,7 @@
 
 
 <div role = 'tabpanel' class="course-topic-tabs" style='margin-top: 20px'>
-  <ul class="nav nav-pills" role="tablist">
+  <ul class="nav nav-tabs" role="tablist">
   <% @course.topics.each_with_index do |topic, i| %>
 	  	<% active = i == 0 ? 'active' : 'inactive' %>
 	    <li role='presentation' class= "<%= active %>">
